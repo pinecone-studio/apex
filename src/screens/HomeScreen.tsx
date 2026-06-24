@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import StatusBarRow from '../components/StatusBarRow';
 import LexiBot from '../components/LexiBot';
 import { colors, fonts, shadows } from '../theme';
+import { useChild } from '../hooks/useChild';
 
 const cards = [
   { to: 'Reading', bg: colors.sand.lightest, icon: '📖', title: 'Унших эхлэх', sub: '12-оос 6-р хичээл' },
@@ -13,13 +14,16 @@ const cards = [
   { to: 'DyslexiaTest', bg: colors.lavender.lightest, icon: '🧠', title: 'Дислекси шалгалт', sub: '5 мин · 4-7 нас' },
 ];
 
-const stats: [string, string, string][] = [
-  ['⭐', '24', 'Од'],
-  ['🔥', '5', 'Тасралтгүй өдөр'],
-  ['🏅', '3', 'Тэмдэг'],
-];
-
 export default function HomeScreen({ navigation }: { navigation: any }) {
+  const { child } = useChild();
+
+  const unlockedBadges = child?.badges.filter((b) => b.unlocked).length ?? 0;
+  const stats: [string, string, string][] = [
+    ['⭐', String(child?.stars ?? 0), 'Од'],
+    ['🔥', String(child?.streak ?? 0), 'Тасралтгүй өдөр'],
+    ['🏅', String(unlockedBadges), 'Тэмдэг'],
+  ];
+
   return (
     <View style={styles.root}>
       <StatusBarRow />
@@ -28,10 +32,10 @@ export default function HomeScreen({ navigation }: { navigation: any }) {
         <View style={styles.greetRow}>
           <View>
             <Text style={styles.greetHi}>Сайн уу,</Text>
-            <Text style={styles.greetName}>Emma! 👋</Text>
+            <Text style={styles.greetName}>{child?.name ?? '...'}! 👋</Text>
           </View>
           <LinearGradient colors={['#D8C4B0', '#C4A08C']} style={styles.avatar}>
-            <Text style={{ fontSize: 30 }}>🦊</Text>
+            <Text style={{ fontSize: 30 }}>{child?.avatar ?? '🦊'}</Text>
           </LinearGradient>
         </View>
 

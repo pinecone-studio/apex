@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import StatusBarRow from '../components/StatusBarRow';
 import { colors, fonts, shadows } from '../theme';
+import { useChild } from '../hooks/useChild';
 
 const CUSTOMIZE = [
   { e: '💇', l: 'Үс' },
@@ -11,11 +13,13 @@ const CUSTOMIZE = [
   { e: '🏞️', l: 'Дэвсгэр' },
 ];
 const SWATCHES = ['#E8D8C3', '#D8A48F', '#B8C9B0', '#A8C4CE', '#8B7AB8'];
-const ACHIEVEMENTS = ['🌟', '🔥', '📚', '🏅'];
 const ACH_BG = ['#F0E8D8', '#F5DDD5', '#E8E3F5', '#D8E8D4'];
 
 export default function ProfileScreen() {
   const [active, setActive] = useState(0);
+  const { signOut } = useAuth();
+  const { user } = useUser();
+  const { child } = useChild();
   return (
     <View style={styles.root}>
       <StatusBarRow />
@@ -27,11 +31,13 @@ export default function ProfileScreen() {
           <Text style={[styles.deco, { top: 12, left: 20 }]}>⭐</Text>
           <Text style={[styles.deco, { top: 24, right: 24 }]}>✨</Text>
           <View style={styles.avatar}>
-            <Text style={{ fontSize: 56 }}>🦊</Text>
+            <Text style={{ fontSize: 56 }}>{child?.avatar ?? '🦊'}</Text>
           </View>
-          <Text style={styles.name}>Emma</Text>
+          <Text style={styles.name}>{child?.name ?? '...'}</Text>
           <View style={styles.level}>
-            <Text style={styles.levelText}>4-р түвшин · Унших аялагч</Text>
+            <Text style={styles.levelText}>
+              {(child?.level ?? 1)}-р түвшин · {child?.title ?? 'Унших аялагч'}
+            </Text>
           </View>
         </LinearGradient>
 
@@ -65,15 +71,28 @@ export default function ProfileScreen() {
         {/* Achievements */}
         <Text style={styles.sectionTitle}>Миний амжилтууд</Text>
         <View style={styles.achRow}>
-          {ACHIEVEMENTS.map((e, i) => (
-            <View key={i} style={[styles.achItem, { backgroundColor: ACH_BG[i] }]}>
-              <Text style={{ fontSize: 22 }}>{e}</Text>
+          {(child?.badges ?? []).slice(0, 4).map((b, i) => (
+            <View
+              key={b.id}
+              style={[styles.achItem, { backgroundColor: ACH_BG[i % ACH_BG.length], opacity: b.unlocked ? 1 : 0.35 }]}
+            >
+              <Text style={{ fontSize: 22 }}>{b.emoji}</Text>
             </View>
           ))}
-          <View style={styles.achMore}>
-            <Text style={styles.achMoreText}>+8</Text>
-          </View>
+          {(child?.badges?.length ?? 0) > 4 ? (
+            <View style={styles.achMore}>
+              <Text style={styles.achMoreText}>+{(child?.badges.length ?? 0) - 4}</Text>
+            </View>
+          ) : null}
         </View>
+
+        {/* Account */}
+        {user?.username ? (
+          <Text style={styles.account}>Нэвтэрсэн: @{user.username}</Text>
+        ) : null}
+        <Pressable style={styles.signOut} onPress={() => signOut()}>
+          <Text style={styles.signOutText}>Гарах</Text>
+        </Pressable>
       </ScrollView>
     </View>
   );
@@ -98,6 +117,17 @@ const styles = StyleSheet.create({
   level: { backgroundColor: 'rgba(255,255,255,0.2)', paddingHorizontal: 12, paddingVertical: 4, borderRadius: 12, marginTop: 4 },
   levelText: { fontFamily: fonts.lexend.semibold, fontSize: 12, color: '#fff' },
   sectionTitle: { fontFamily: fonts.fredoka.semibold, fontSize: 16, color: colors.warm.text, marginTop: 20 },
+  account: { fontFamily: fonts.lexend.regular, fontSize: 13, color: colors.warm.gray, textAlign: 'center', marginTop: 24 },
+  signOut: {
+    marginTop: 12,
+    backgroundColor: colors.warm.card,
+    borderRadius: 16,
+    paddingVertical: 14,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.peach.light,
+  },
+  signOutText: { fontFamily: fonts.fredoka.semibold, fontSize: 15, color: colors.peach.dark },
   customizeRow: { flexDirection: 'row', gap: 10, marginTop: 12 },
   customizeItem: { flex: 1, backgroundColor: colors.warm.card, borderRadius: 16, paddingVertical: 14, alignItems: 'center', ...shadows.card },
   customizeLabel: { fontFamily: fonts.lexend.semibold, fontSize: 10, color: colors.warm.text, marginTop: 4 },
