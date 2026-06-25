@@ -1,11 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import LexiBot from '../components/LexiBot';
 import { colors, fonts, shadows } from '../theme';
+import { useChild } from '../hooks/useChild';
 
 export default function SplashScreen({ navigation }: { navigation: any }) {
   const shimmer = useRef(new Animated.Value(0)).current;
+  const { child, loading } = useChild();
+  const navigatedRef = useRef(false);
+  const [minElapsed, setMinElapsed] = useState(false);
 
   useEffect(() => {
     Animated.loop(
@@ -17,9 +21,21 @@ export default function SplashScreen({ navigation }: { navigation: any }) {
       })
     ).start();
 
-    const t = setTimeout(() => navigation.replace('Main'), 3000);
+    const t = setTimeout(() => setMinElapsed(true), 2200);
     return () => clearTimeout(t);
-  }, [navigation, shimmer]);
+  }, [shimmer]);
+
+  // Once the splash has shown long enough and the learner profile has loaded,
+  // route first-time users to the Lexi-AI dyslexia test, returners to the app.
+  useEffect(() => {
+    if (navigatedRef.current || !minElapsed || loading) return;
+    navigatedRef.current = true;
+    if (child && !child.dyslexiaTestDone) {
+      navigation.replace('DyslexiaTest', { onboarding: true });
+    } else {
+      navigation.replace('Main');
+    }
+  }, [minElapsed, loading, child, navigation]);
 
   return (
     <LinearGradient colors={['#F0E6D8', '#FAF0E8', '#FFFDF8']} style={styles.container}>

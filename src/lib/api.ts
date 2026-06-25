@@ -59,8 +59,13 @@ export type Child = {
   stars: number;
   streak: number;
   coins: number;
+  dyslexiaTestDone: boolean;
+  dyslexiaScore: number | null;
+  dyslexiaRisk: string | null;
   badges: Badge[];
 };
+
+export type DyslexiaRisk = 'low' | 'medium' | 'high';
 
 export type Lesson = { id: string; order: number; letter: string; title: string; emoji: string };
 export type Story = { id: string; title: string; emoji: string; level: string; category: string; minutes: number };
@@ -94,6 +99,12 @@ export const api = {
     ),
 
   stats: (clerkId: string) => request<Stats>(`/api/me/${clerkId}/stats`),
+
+  saveDyslexiaResult: (clerkId: string, data: { score: number; risk: DyslexiaRisk }) =>
+    request<Child>(`/api/me/${clerkId}/dyslexia-result`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 
   unlockBadge: (clerkId: string, key: string) =>
     request<Badge>(`/api/me/${clerkId}/badge/${key}/unlock`, { method: 'POST' }),

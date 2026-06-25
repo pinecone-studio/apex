@@ -153,6 +153,25 @@ app.get(
   })
 );
 
+// Save the Lexi-AI dyslexia screening result and mark onboarding test as done.
+app.post(
+  '/api/me/:clerkId/dyslexia-result',
+  wrap(async (req, res) => {
+    const { score, risk } = req.body || {};
+    const child = await prisma.child.update({
+      where: { clerkId: req.params.clerkId },
+      data: {
+        dyslexiaTestDone: true,
+        dyslexiaScore: typeof score === 'number' ? score : null,
+        dyslexiaRisk: risk || null,
+        dyslexiaTestedAt: new Date(),
+      },
+      include: childInclude,
+    });
+    res.json(child);
+  })
+);
+
 // Unlock a badge for the learner.
 app.post(
   '/api/me/:clerkId/badge/:key/unlock',
