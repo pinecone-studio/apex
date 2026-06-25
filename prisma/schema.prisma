@@ -15,6 +15,8 @@ datasource db {
 /// A learner profile (the child using the app)
 model Child {
   id        String   @id @default(cuid())
+  clerkId   String?  @unique // the Clerk user this learner belongs to
+  email     String?
   name      String
   avatar    String   @default("🦊")
   level     Int      @default(1)
