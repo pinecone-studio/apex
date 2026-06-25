@@ -133,6 +133,10 @@ exports.Prisma.ChildScalarFieldEnum = {
   stars: 'stars',
   streak: 'streak',
   coins: 'coins',
+  dyslexiaTestDone: 'dyslexiaTestDone',
+  dyslexiaScore: 'dyslexiaScore',
+  dyslexiaRisk: 'dyslexiaRisk',
+  dyslexiaTestedAt: 'dyslexiaTestedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

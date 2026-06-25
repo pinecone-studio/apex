@@ -24,6 +24,13 @@ model Child {
   stars     Int      @default(0)
   streak    Int      @default(0)
   coins     Int      @default(0)
+
+  // Lexi-AI дислекси урьдчилсан шалгалт (шинэ хэрэглэгч анх орж ирэхэд өгнө)
+  dyslexiaTestDone Boolean  @default(false)
+  dyslexiaScore    Int? // зөв хариултын тоо (0..6)
+  dyslexiaRisk     String? // 'low' | 'medium' | 'high'
+  dyslexiaTestedAt DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -8,9 +8,11 @@ import {
   Animated,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { colors, fonts, shadows } from '../theme';
 import { useSpeech } from '../hooks/useSpeech';
+import { useChild } from '../hooks/useChild';
+import { api, DyslexiaRisk } from '../lib/api';
 
 type TaskAnswer = boolean | null;
 
@@ -72,11 +74,15 @@ const TASKS = [
 ];
 
 export default function DyslexiaTestScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
+  const route = useRoute<any>();
+  const onboarding = route.params?.onboarding === true;
+  const { child, refresh } = useChild();
   const { speak, isPlaying } = useSpeech();
   const [currentTask, setCurrentTask] = useState(0);
   const [answers, setAnswers] = useState<TaskAnswer[]>(Array(6).fill(null));
   const [showResult, setShowResult] = useState(false);
+  const [saved, setSaved] = useState(false);
   const fadeAnim = useState(new Animated.Value(1))[0];
 
   const task = TASKS[currentTask];
@@ -121,6 +127,20 @@ export default function DyslexiaTestScreen() {
   };
 
   const wrongCount = answers.filter((a) => a === false).length;
+  const score = 6 - wrongCount;
+  const risk: DyslexiaRisk = wrongCount <= 1 ? 'low' : wrongCount <= 3 ? 'medium' : 'high';
+
+  // When the test finishes, persist the result to the backend (and mark the
+  // onboarding test as done so the learner isn't asked again next time).
+  useEffect(() => {
+    if (!showResult || saved || !child?.clerkId) return;
+    setSaved(true);
+    api
+      .saveDyslexiaResult(child.clerkId, { score, risk })
+      .then(() => refresh())
+      .catch((e) => console.warn('Дислекси үр дүн хадгалахад алдаа:', e));
+  }, [showResult, saved, child, score, risk, refresh]);
+
   const resultColor =
     wrongCount <= 1 ? colors.sage.DEFAULT : wrongCount <= 3 ? colors.sand.DEFAULT : colors.peach.DEFAULT;
   const resultText =
@@ -155,9 +175,9 @@ export default function DyslexiaTestScreen() {
 
           <TouchableOpacity
             style={styles.doneButton}
-            onPress={() => navigation.goBack()}
+            onPress={() => (onboarding ? navigation.replace('Main') : navigation.goBack())}
           >
-            <Text style={styles.doneButtonText}>Дуусгах</Text>
+            <Text style={styles.doneButtonText}>{onboarding ? 'Эхлэх' : 'Дуусгах'}</Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
@@ -167,9 +187,13 @@ export default function DyslexiaTestScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>←</Text>
-        </TouchableOpacity>
+        {onboarding ? (
+          <View style={{ width: 32 }} />
+        ) : (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={styles.backButton}>←</Text>
+          </TouchableOpacity>
+        )}
         <View style={styles.progressContainer}>
           <View style={styles.progressBar}>
             <View

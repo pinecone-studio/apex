@@ -1424,6 +1424,7 @@ export namespace Prisma {
     stars: number | null
     streak: number | null
     coins: number | null
+    dyslexiaScore: number | null
   }
 
   export type ChildSumAggregateOutputType = {
@@ -1431,6 +1432,7 @@ export namespace Prisma {
     stars: number | null
     streak: number | null
     coins: number | null
+    dyslexiaScore: number | null
   }
 
   export type ChildMinAggregateOutputType = {
@@ -1444,6 +1446,10 @@ export namespace Prisma {
     stars: number | null
     streak: number | null
     coins: number | null
+    dyslexiaTestDone: boolean | null
+    dyslexiaScore: number | null
+    dyslexiaRisk: string | null
+    dyslexiaTestedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1459,6 +1465,10 @@ export namespace Prisma {
     stars: number | null
     streak: number | null
     coins: number | null
+    dyslexiaTestDone: boolean | null
+    dyslexiaScore: number | null
+    dyslexiaRisk: string | null
+    dyslexiaTestedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1474,6 +1484,10 @@ export namespace Prisma {
     stars: number
     streak: number
     coins: number
+    dyslexiaTestDone: number
+    dyslexiaScore: number
+    dyslexiaRisk: number
+    dyslexiaTestedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1485,6 +1499,7 @@ export namespace Prisma {
     stars?: true
     streak?: true
     coins?: true
+    dyslexiaScore?: true
   }
 
   export type ChildSumAggregateInputType = {
@@ -1492,6 +1507,7 @@ export namespace Prisma {
     stars?: true
     streak?: true
     coins?: true
+    dyslexiaScore?: true
   }
 
   export type ChildMinAggregateInputType = {
@@ -1505,6 +1521,10 @@ export namespace Prisma {
     stars?: true
     streak?: true
     coins?: true
+    dyslexiaTestDone?: true
+    dyslexiaScore?: true
+    dyslexiaRisk?: true
+    dyslexiaTestedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1520,6 +1540,10 @@ export namespace Prisma {
     stars?: true
     streak?: true
     coins?: true
+    dyslexiaTestDone?: true
+    dyslexiaScore?: true
+    dyslexiaRisk?: true
+    dyslexiaTestedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1535,6 +1559,10 @@ export namespace Prisma {
     stars?: true
     streak?: true
     coins?: true
+    dyslexiaTestDone?: true
+    dyslexiaScore?: true
+    dyslexiaRisk?: true
+    dyslexiaTestedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1637,6 +1665,10 @@ export namespace Prisma {
     stars: number
     streak: number
     coins: number
+    dyslexiaTestDone: boolean
+    dyslexiaScore: number | null
+    dyslexiaRisk: string | null
+    dyslexiaTestedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ChildCountAggregateOutputType | null
@@ -1671,6 +1703,10 @@ export namespace Prisma {
     stars?: boolean
     streak?: boolean
     coins?: boolean
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: boolean
+    dyslexiaRisk?: boolean
+    dyslexiaTestedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     badges?: boolean | Child$badgesArgs<ExtArgs>
@@ -1690,6 +1726,10 @@ export namespace Prisma {
     stars?: boolean
     streak?: boolean
     coins?: boolean
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: boolean
+    dyslexiaRisk?: boolean
+    dyslexiaTestedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["child"]>
@@ -1705,6 +1745,10 @@ export namespace Prisma {
     stars?: boolean
     streak?: boolean
     coins?: boolean
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: boolean
+    dyslexiaRisk?: boolean
+    dyslexiaTestedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -1735,6 +1779,10 @@ export namespace Prisma {
       stars: number
       streak: number
       coins: number
+      dyslexiaTestDone: boolean
+      dyslexiaScore: number | null
+      dyslexiaRisk: string | null
+      dyslexiaTestedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["child"]>
@@ -2143,6 +2191,10 @@ export namespace Prisma {
     readonly stars: FieldRef<"Child", 'Int'>
     readonly streak: FieldRef<"Child", 'Int'>
     readonly coins: FieldRef<"Child", 'Int'>
+    readonly dyslexiaTestDone: FieldRef<"Child", 'Boolean'>
+    readonly dyslexiaScore: FieldRef<"Child", 'Int'>
+    readonly dyslexiaRisk: FieldRef<"Child", 'String'>
+    readonly dyslexiaTestedAt: FieldRef<"Child", 'DateTime'>
     readonly createdAt: FieldRef<"Child", 'DateTime'>
     readonly updatedAt: FieldRef<"Child", 'DateTime'>
   }
@@ -8195,6 +8247,10 @@ export namespace Prisma {
     stars: 'stars',
     streak: 'streak',
     coins: 'coins',
+    dyslexiaTestDone: 'dyslexiaTestDone',
+    dyslexiaScore: 'dyslexiaScore',
+    dyslexiaRisk: 'dyslexiaRisk',
+    dyslexiaTestedAt: 'dyslexiaTestedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8331,6 +8387,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -8341,13 +8404,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -8382,6 +8438,10 @@ export namespace Prisma {
     stars?: IntFilter<"Child"> | number
     streak?: IntFilter<"Child"> | number
     coins?: IntFilter<"Child"> | number
+    dyslexiaTestDone?: BoolFilter<"Child"> | boolean
+    dyslexiaScore?: IntNullableFilter<"Child"> | number | null
+    dyslexiaRisk?: StringNullableFilter<"Child"> | string | null
+    dyslexiaTestedAt?: DateTimeNullableFilter<"Child"> | Date | string | null
     createdAt?: DateTimeFilter<"Child"> | Date | string
     updatedAt?: DateTimeFilter<"Child"> | Date | string
     badges?: BadgeListRelationFilter
@@ -8400,6 +8460,10 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaTestDone?: SortOrder
+    dyslexiaScore?: SortOrderInput | SortOrder
+    dyslexiaRisk?: SortOrderInput | SortOrder
+    dyslexiaTestedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     badges?: BadgeOrderByRelationAggregateInput
@@ -8421,6 +8485,10 @@ export namespace Prisma {
     stars?: IntFilter<"Child"> | number
     streak?: IntFilter<"Child"> | number
     coins?: IntFilter<"Child"> | number
+    dyslexiaTestDone?: BoolFilter<"Child"> | boolean
+    dyslexiaScore?: IntNullableFilter<"Child"> | number | null
+    dyslexiaRisk?: StringNullableFilter<"Child"> | string | null
+    dyslexiaTestedAt?: DateTimeNullableFilter<"Child"> | Date | string | null
     createdAt?: DateTimeFilter<"Child"> | Date | string
     updatedAt?: DateTimeFilter<"Child"> | Date | string
     badges?: BadgeListRelationFilter
@@ -8439,6 +8507,10 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaTestDone?: SortOrder
+    dyslexiaScore?: SortOrderInput | SortOrder
+    dyslexiaRisk?: SortOrderInput | SortOrder
+    dyslexiaTestedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ChildCountOrderByAggregateInput
@@ -8462,6 +8534,10 @@ export namespace Prisma {
     stars?: IntWithAggregatesFilter<"Child"> | number
     streak?: IntWithAggregatesFilter<"Child"> | number
     coins?: IntWithAggregatesFilter<"Child"> | number
+    dyslexiaTestDone?: BoolWithAggregatesFilter<"Child"> | boolean
+    dyslexiaScore?: IntNullableWithAggregatesFilter<"Child"> | number | null
+    dyslexiaRisk?: StringNullableWithAggregatesFilter<"Child"> | string | null
+    dyslexiaTestedAt?: DateTimeNullableWithAggregatesFilter<"Child"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Child"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Child"> | Date | string
   }
@@ -8832,6 +8908,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeCreateNestedManyWithoutChildInput
@@ -8850,6 +8930,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeUncheckedCreateNestedManyWithoutChildInput
@@ -8868,6 +8952,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUpdateManyWithoutChildNestedInput
@@ -8886,6 +8974,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUncheckedUpdateManyWithoutChildNestedInput
@@ -8904,6 +8996,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8919,6 +9015,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8934,6 +9034,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9347,6 +9451,33 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9404,6 +9535,10 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaTestDone?: SortOrder
+    dyslexiaScore?: SortOrder
+    dyslexiaRisk?: SortOrder
+    dyslexiaTestedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9413,6 +9548,7 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaScore?: SortOrder
   }
 
   export type ChildMaxOrderByAggregateInput = {
@@ -9426,6 +9562,10 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaTestDone?: SortOrder
+    dyslexiaScore?: SortOrder
+    dyslexiaRisk?: SortOrder
+    dyslexiaTestedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9441,6 +9581,10 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaTestDone?: SortOrder
+    dyslexiaScore?: SortOrder
+    dyslexiaRisk?: SortOrder
+    dyslexiaTestedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9450,6 +9594,7 @@ export namespace Prisma {
     stars?: SortOrder
     streak?: SortOrder
     coins?: SortOrder
+    dyslexiaScore?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9504,6 +9649,44 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9516,11 +9699,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type ChildRelationFilter = {
@@ -9558,14 +9736,6 @@ export namespace Prisma {
     emoji?: SortOrder
     unlocked?: SortOrder
     childId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -9821,6 +9991,22 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -9915,10 +10101,6 @@ export namespace Prisma {
     connect?: ChildWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type ChildUpdateOneRequiredWithoutBadgesNestedInput = {
     create?: XOR<ChildCreateWithoutBadgesInput, ChildUncheckedCreateWithoutBadgesInput>
     connectOrCreate?: ChildCreateOrConnectWithoutBadgesInput
@@ -10002,6 +10184,33 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10047,17 +10256,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10085,6 +10283,55 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10097,19 +10344,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -10301,6 +10535,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     readingSessions?: ReadingSessionCreateNestedManyWithoutChildInput
@@ -10318,6 +10556,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     readingSessions?: ReadingSessionUncheckedCreateNestedManyWithoutChildInput
@@ -10351,6 +10593,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     readingSessions?: ReadingSessionUpdateManyWithoutChildNestedInput
@@ -10368,6 +10614,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     readingSessions?: ReadingSessionUncheckedUpdateManyWithoutChildNestedInput
@@ -10385,6 +10635,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeCreateNestedManyWithoutChildInput
@@ -10402,6 +10656,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeUncheckedCreateNestedManyWithoutChildInput
@@ -10435,6 +10693,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUpdateManyWithoutChildNestedInput
@@ -10452,6 +10714,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUncheckedUpdateManyWithoutChildNestedInput
@@ -10469,6 +10735,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeCreateNestedManyWithoutChildInput
@@ -10486,6 +10756,10 @@ export namespace Prisma {
     stars?: number
     streak?: number
     coins?: number
+    dyslexiaTestDone?: boolean
+    dyslexiaScore?: number | null
+    dyslexiaRisk?: string | null
+    dyslexiaTestedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     badges?: BadgeUncheckedCreateNestedManyWithoutChildInput
@@ -10519,6 +10793,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUpdateManyWithoutChildNestedInput
@@ -10536,6 +10814,10 @@ export namespace Prisma {
     stars?: IntFieldUpdateOperationsInput | number
     streak?: IntFieldUpdateOperationsInput | number
     coins?: IntFieldUpdateOperationsInput | number
+    dyslexiaTestDone?: BoolFieldUpdateOperationsInput | boolean
+    dyslexiaScore?: NullableIntFieldUpdateOperationsInput | number | null
+    dyslexiaRisk?: NullableStringFieldUpdateOperationsInput | string | null
+    dyslexiaTestedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     badges?: BadgeUncheckedUpdateManyWithoutChildNestedInput
