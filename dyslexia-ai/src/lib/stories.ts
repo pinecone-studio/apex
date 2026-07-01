@@ -20,6 +20,11 @@ export const STORIES: StoryMeta[] = [
   { id: 'huuhduudiin-od', emoji: '🌟', bg: colors.sand.lightest, title: 'Хүүхдүүдийн од', level: '★ Анхан шат · Орой үдшийн', category: 'орой' },
 ];
 
+// Од бүр нэмэгдэх тусам үнэтэй. 1 одтой (★) үлгэр үнэгүй.
+export const storyStars = (level: string) => (level.match(/★/g) ?? []).length;
+export const storyPrice = (m: StoryMeta) => Math.max(0, storyStars(m.level) - 1) * 20;
+export const storyById = (id: string) => STORIES.find((s) => s.id === id);
+
 export const catFilter = (cat: number) =>
   cat === 0 ? STORIES : STORIES.filter((s) => s.category === (['', 'ардын', 'сонгодог', 'орой'][cat] ?? ''));
 

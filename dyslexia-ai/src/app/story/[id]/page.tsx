@@ -78,7 +78,7 @@ export default function StoryReader() {
   const next = () => {
     stop();
     if (page < totalPages - 1) setPage(page + 1);
-    else router.push('/stories');
+    else router.push(`/story/${id}/quiz`);
   };
 
   const progress = ((page + 1) / totalPages) * 100;

@@ -45,6 +45,7 @@ export type Child = {
   dyslexiaScore: number | null;
   dyslexiaRisk: string | null;
   dyslexiaWeakSkills: string[];
+  unlockedStories: string[];
   badges: Badge[];
 };
 
@@ -93,6 +94,9 @@ export const api = {
     ),
 
   stats: (clerkId: string) => request<Stats>(`/api/me/${clerkId}/stats`),
+
+  unlockStory: (clerkId: string, storyId: string) =>
+    request<Child>(`/api/me/${clerkId}/unlock-story`, { method: 'POST', body: JSON.stringify({ storyId }) }),
 
   saveDyslexiaResult: (
     clerkId: string,

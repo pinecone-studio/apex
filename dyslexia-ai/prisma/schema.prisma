@@ -29,6 +29,7 @@ model Child {
   dyslexiaRisk       String?
   dyslexiaTestedAt   DateTime?
   dyslexiaWeakSkills String[]  @default([])
+  unlockedStories    String[]  @default([])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
